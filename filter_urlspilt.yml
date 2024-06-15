@@ -1,0 +1,34 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    url: 'http://zhangsan:redhat@www.ytlinux.com:8081/login/index.html?guest_id=2023'
+  tasks:
+    - name: "get url hostname"
+      debug:
+        msg: "{{ url | urlsplit('hostname')  }}"
+      #获取域名www.ytlinux.com
+
+    - name: "get url netloc"
+      debug:
+        msg: "{{ url | urlsplit('netloc')  }}"
+     #获取域名前认证信息，以及域名和端口号
+
+    - name: "get url path"
+      debug:
+        msg: "{{ url | urlsplit('path')  }}"
+     #获取域名后的路径信息
+
+    - name: "get url port"
+      debug:
+        msg: "{{ url | urlsplit('port')  }}"
+    #获取url的端口号
+
+    - name: "get url scheme"
+      debug:
+        msg: "{{ url | urlsplit('scheme')  }}"
+    #获取url使用的访问协议http或者https
+
+    - name: "get url query"
+      debug:
+        msg: "{{ url | urlsplit('query') }}"
+    #查询url后的字符串内容，即以?号开头的部分内容

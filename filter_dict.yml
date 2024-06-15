@@ -1,0 +1,43 @@
+- name: dict  demo playbook
+  hosts: servera
+  gather_facts: no
+  vars:
+          dev_user:
+                  bob:
+                          uid: 1000
+                          comment: "mysql_user"
+                  alice:
+                          uid: 2000
+                          comment: "web_user"
+          ops_user:
+                   tom:
+                           uid: 3000
+                           comment: "ops_user1"
+                   natasha:
+                           uid: 4000
+                           comment: "ops_user2"
+          pkgs_list:
+                  - name: httpd
+                    version: 2.4
+                  - name: nginx
+                    version: 1.2
+                  - name: mariadb
+                    version: 5.0
+          get_file: "{{ lookup('file','server_list.json')|from_json }}"
+          
+  tasks:
+          - debug:
+                  msg: "{{ dev_user|combine(ops_user) }}"
+            #将dev_user和ops_user两个字典合并成一个字典
+          - debug:
+                  msg: "{{ dev_user|dict2items }}"
+            #将dev_user字典转化为列表
+          - debug:
+                  msg: "{{ pkgs_list |items2dict(key_name='name',value_name='version') }}"
+            #将pkgs_list列表转化为字典,注意必须指定key_name和vaule_name;除非字典的键值已经设置为了key，vaule的形式
+          - debug:
+                  msg: "{{ ops_user|to_json}}"
+            #将ops_user装换为json格式
+          - debug:
+                  msg: "{{ get_file }}"
+            #读取从json文件接收到的数据

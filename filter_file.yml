@@ -1,0 +1,16 @@
+- hosts: servera
+  vars:
+          filepath: /etc/sysconfig/selinux
+  tasks:
+          - debug:
+                  msg: "{{ filepath|basename }}"
+                  #返回文件路径中的文件名部分
+          - debug:
+                  msg: "{{ filepath|dirname }}"
+                  #返回文件路径中的目录部分
+          - debug:
+                  msg: "{{ '~/.bashrc'|expanduser }}"
+                  #将~替换为当前远程用户的家目录
+          - debug:
+                  msg: "{{ filepath|realpath }}"
+                  #输出软链接后面真实的文件路径

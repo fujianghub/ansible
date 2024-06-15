@@ -1,0 +1,30 @@
+- hosts: servera
+  gather_facts: false
+  vars:
+          teststr: "abc123ABV"
+          teststr1: " abc "
+          teststr2: "123456789"
+          teststr3: "sfacb1335@#$%"
+  tasks:
+          - debug:
+                  msg: "{{ teststr | upper }}"
+          - debug:
+                  msg: "{{ teststr | lower }}"
+          - debug:
+                  msg: "{{ teststr | capitalize }}"
+          - debug:
+                  msg: "{{ teststr | reverse }}"
+          - debug:
+                  msg: "{{ teststr|first }}"
+          - debug:
+                  msg: "{{ teststr|last }}"
+          - debug:
+                  msg: "{{ teststr1 | trim }}"
+          - debug:
+                  msg: "{{ teststr2 | center(30) }}"
+          - debug:
+                  msg: "{{ teststr2 | length }}"
+          - debug:
+                  msg: "{{ teststr3 | list }}"
+          - debug:
+                  msg: "{{ teststr3 | shuffle }}"

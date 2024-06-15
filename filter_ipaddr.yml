@@ -1,0 +1,42 @@
+- hosts: servera
+  gather_facts: no
+  vars: 
+           my_ip_addr: "192.168.0.1/24"
+           ipv6_test: "fe80::ac69:53ca:9f8:a279/64"
+  tasks:
+  - name: ipaddr 
+    debug:
+      msg: "{{ my_ip_addr | ipaddr }}"
+    #获取字符串中ip地址和子网掩码位数
+  - name: ipaddr(network)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('network') }}"
+    #获取ip地址中的子网地址，不带掩码
+  - name: ipaddr(host)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('host') }}"
+    #获取主机的ip地址且带掩码
+  - name: ipaddr(netmask)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('netmask') }}"
+    #获取掩码地址
+  - name: ipaddr(size)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('size') }}"
+    #获取子网中可用的IP数量
+  - name: ipaddr(subnet)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('subnet') }}"
+    #获取子网地址和掩码
+  - name: ipaddr(ipv4)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('ipv4') }}"
+    #获取IPv4的地址
+  - name: ipaddr(broadcast)
+    debug:
+      msg: "{{ my_ip_addr | ipaddr('broadcast') }}"
+    #获取广播地址
+  - name: ipaddr(ipv6)
+    debug:
+      msg: "{{ ipv6_test | ipaddr('ipv6') }}"
+    #获取ipv6地址和掩码

@@ -1,0 +1,39 @@
+- hosts: servera
+  gather_facts: no
+  vars:
+          testnum: -1
+  tasks:
+          - debug:
+                  msg: "{{ 8+('8.6'|int) }}"
+                  #将8.6转换为整数8并加上8 结果返回16
+          - debug:
+                  msg: "{{ 'a'|int(default=6) }}"
+                  #将字符串a转换为整数，无法转换则默认返回6
+          - debug:
+                  msg: "{{ '8'|float }}"
+                  #将字符串8转换为浮点数,返回8.0
+          - debug:
+                  msg: "{{ 'a'|float(default=8.88) }}"
+                  #将字符串a转换成浮点数失败则使用默认值8.88替代
+          - debug:
+                  msg: "{{ testnum|abs }}"
+                  #获取变量testnum绝对值
+          - debug:
+                  msg: "{{ 12.5|round }}"
+                  #四舍五入保留整数
+          - debug:
+                  msg: "{{ 3.1415926 | round(5) }}"
+                  #四舍五入保留 5 位小数
+          - debug:
+                  msg: "{{ 100|random }}"
+                  # 从0到100中随机返回一个数字
+          - debug:
+                  msg: "{{ 10|random(start=5) }}"
+                  # 从5到10中随机返回一个数字
+          - debug:
+                  msg: "{{ 15|random(start=4,step=3) }}"
+                   # 从4到15中随机返回一个数字，步长为3
+                   # 返回的随机数只可能是：4，7，10，13中的一个
+          - debug:
+                  msg: "{{ 15|random(step=4) }}"
+                  #从0到15随机返回一个数字，步长为4

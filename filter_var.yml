@@ -1,0 +1,8 @@
+- hosts: servera
+  tasks:
+          - shell: ls /tmp/hello_errors
+            register: cmd_status
+            ignore_errors: true
+          - debug:
+                  msg: "hello ansible"
+            failed_when: cmd_status|failed

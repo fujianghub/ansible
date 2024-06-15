@@ -1,0 +1,12 @@
+{
+"webclutser": {
+            "server": [
+                {
+                    "name": "servera"
+                },
+                {
+                    "name": "serverb"
+                }
+            ]
+}
+}

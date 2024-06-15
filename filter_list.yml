@@ -1,0 +1,69 @@
+- hosts: servera
+  vars:
+          testlist1: [1,2,4,6,3,5]
+          testlist2: [1,[2,3,4,[5,6]]]
+          testlist3: [1,2,'a','b']
+          testlist4: [1,'A','b',['C','d'],'Efg']
+          testlist5: ['abc',1,2,'a',3,2,'1','abc']
+          testlist6: ['abc',3,'1','b','a']
+  tasks:
+          - debug:
+                  msg: "{{ testlist1 | length }}"
+                  #返回列表长度
+          - debug:
+                  msg: "{{ testlist1 |first }}"
+                  #返回列表的第一个值
+          - debug:
+                  msg: "{{ testlist1 | last }}"
+                  #返回列表的最后一个值
+          - debug:
+                  msg: "{{ testlist1 | min }}"
+                  #返回列表中最小的值
+          - debug:
+                  msg: "{{ testlist1 | max }}"
+                  #返回列表中最大的值
+          - debug:
+                  msg: "{{ testlist1 | sort }}"
+                  #重新排列列表，默认为升序排列，sort(reverse=true)为降序
+          - debug:
+                  msg: "{{ testlist1 | sort(reverse=true) }}"
+                  #重新排列列表，默认为升序排列，sort(reverse=true)为降序
+          - debug:
+                  msg: "{{ testlist2 | flatten }}"
+                  #返回纯数字非嵌套列表中所有数字的和
+          - debug:
+                  msg: "{{ testlist2 | flatten(levels=1) }}"
+                  #拉平嵌套的列表testlist2的第一个层级
+          - debug:
+                  msg: "{{ testlist2 | flatten | max }}"
+                  #返回拉平后的列表最大的值
+          - debug:
+                  msg: "{{ testlist3 | join }}"
+                  #将列表testlist3的元素合并为一个字符串
+          - debug:
+                  msg: "{{ testlist3 |join(',')}}"
+                  #将列表testlist3的元素合并为一个字符串，且使用逗号分隔列表的元素
+          - debug:
+                  msg: "{{ testlist3 | random }}"
+                  #从列表中随机返回一个元素
+          - debug:
+                  msg: "{{ testlist3 | shuffle }}"
+                  #将随机返回列表中的元素
+          - debug:
+                  msg: "{{ testlist4 | upper }}"
+                  #将列表中的字符串转换为大写形式
+          - debug:
+                  msg: "{{ testlist4 | lower }}"
+                  #将列表中的字符串转换为小写形式
+          - debug:
+                  msg: "{{ testlist5 | union(testlist6) }}"
+                  #将testlist5和testlist6两个列表合并，如果元素有重复，则只留下一个
+          - debug:
+                  msg: "{{ testlist5 | intersect(testlist6) }}"
+                  #获取两个列表的交集
+          - debug:
+                  msg: "{{ testlist5 | difference(testlist6) }}"
+                  #获取存在于testlist5列表中，但不存在于testlist6中的元素
+          - debug:
+                  msg: "{{ testlist5 | symmetric_difference(testlist6) }}"
+                  #获取出两个列表中各自独立的元素，如果重复则只留一个
